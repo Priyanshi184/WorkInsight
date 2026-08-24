@@ -83,35 +83,31 @@ with tab3:
     years=st.number_input("Years At Company",0,40,5)
     overtime=1 if st.selectbox("OverTime",["No","Yes"])=="Yes" else 0
     gender=1 if st.selectbox("Gender",["Female","Male"])=="Male" else 0
-    if st.button("Predict"):
+       if st.button("Predict"):
         try:
-    X = pd.DataFrame([{
-    "Age": age,
-    "MonthlyIncome": salary,
-    "DistanceFromHome": distance,
-    "JobSatisfaction": job,
-    "WorkLifeBalance": work,
-    "YearsAtCompany": years,
-    "OverTime": overtime,
-    "Gender": gender
-}])
+            X = pd.DataFrame([{
+                "Age": age,
+                "MonthlyIncome": salary,
+                "DistanceFromHome": distance,
+                "JobSatisfaction": job,
+                "WorkLifeBalance": work,
+                "YearsAtCompany": years,
+                "OverTime": overtime,
+                "Gender": gender
+            }])
 
-    pred = model.predict(X)[0]
-    conf = max(model.predict_proba(X)[0]) * 100
+            pred = model.predict(X)[0]
+            conf = max(model.predict_proba(X)[0]) * 100
 
-    if pred == 1:
-        st.error("⚠ High Risk of Attrition")
-    else:
-        st.success("✅ Low Risk of Attrition")
+            if pred == 1:
+                st.error("⚠ High Risk of Attrition")
+            else:
+                st.success("✅ Low Risk of Attrition")
 
-    st.info(f"Confidence: {conf:.2f}%")
+            st.info(f"Confidence: {conf:.2f}%")
 
-except Exception as e:
-    st.error(f"Prediction failed: {e}")
-        if pred==1:
-            st.error("⚠ High Risk of Attrition")
-        else:
-            st.success("✅ Low Risk of Attrition")
-        st.info(f"Confidence: {conf:.2f}%")
+        except Exception as e:
+            st.error(f"Prediction failed: {e}")
 
+st.caption("© 2026 WorkInsight | Developed by Priya")
 st.caption("© 2026 WorkInsight | Developed by Priya")

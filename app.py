@@ -84,9 +84,21 @@ with tab3:
     overtime=1 if st.selectbox("OverTime",["No","Yes"])=="Yes" else 0
     gender=1 if st.selectbox("Gender",["Female","Male"])=="Male" else 0
     if st.button("Predict"):
-        X=[[age,salary,distance,job,work,years,overtime,gender]]
-        pred=model.predict(X)[0]
-        conf=max(model.predict_proba(X)[0])*100
+        try:
+    X = [[age, salary, distance, job, work, years, overtime, gender]]
+
+    pred = model.predict(X)[0]
+    conf = max(model.predict_proba(X)[0]) * 100
+
+    if pred == 1:
+        st.error("⚠ High Risk of Attrition")
+    else:
+        st.success("✅ Low Risk of Attrition")
+
+    st.info(f"Confidence: {conf:.2f}%")
+
+except Exception as e:
+    st.error(f"Prediction failed: {e}")
         if pred==1:
             st.error("⚠ High Risk of Attrition")
         else:

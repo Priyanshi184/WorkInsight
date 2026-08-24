@@ -85,7 +85,16 @@ with tab3:
     gender=1 if st.selectbox("Gender",["Female","Male"])=="Male" else 0
     if st.button("Predict"):
         try:
-    X = [[age, salary, distance, job, work, years, overtime, gender]]
+    X = pd.DataFrame([{
+    "Age": age,
+    "MonthlyIncome": salary,
+    "DistanceFromHome": distance,
+    "JobSatisfaction": job,
+    "WorkLifeBalance": work,
+    "YearsAtCompany": years,
+    "OverTime": overtime,
+    "Gender": gender
+}])
 
     pred = model.predict(X)[0]
     conf = max(model.predict_proba(X)[0]) * 100

@@ -9,9 +9,19 @@ st.sidebar.title("🏢 WorkInsight")
 st.sidebar.write("AI-Powered HR Decision Intelligence Platform")
 st.sidebar.success("✅ Model Loaded")
 
+@st.cache_data
+def load_data():
+    return pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
+
+
+@st.cache_resource
+def load_model():
+    return joblib.load("models/attrition_model.pkl")
+
+
 try:
-    df = pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
-    model = joblib.load("models/attrition_model.pkl")
+    df = load_data()
+    model = load_model()
 except FileNotFoundError as e:
     st.error(f"Required file not found: {e}")
     st.stop()

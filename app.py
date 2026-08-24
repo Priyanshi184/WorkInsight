@@ -9,8 +9,15 @@ st.sidebar.title("🏢 WorkInsight")
 st.sidebar.write("AI-Powered HR Decision Intelligence Platform")
 st.sidebar.success("✅ Model Loaded")
 
-df=pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
-model=joblib.load("models/attrition_model.pkl")
+try:
+    df = pd.read_csv("data/WA_Fn-UseC_-HR-Employee-Attrition.csv")
+    model = joblib.load("models/attrition_model.pkl")
+except FileNotFoundError as e:
+    st.error(f"Required file not found: {e}")
+    st.stop()
+except Exception as e:
+    st.error(f"Error loading application files: {e}")
+    st.stop()
 
 total=len(df)
 left=(df["Attrition"]=="Yes").sum()

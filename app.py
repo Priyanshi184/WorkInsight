@@ -73,17 +73,17 @@ with tab2:
     st.subheader("Attrition by Department")
     st.bar_chart(pd.crosstab(df["Department"],df["Attrition"]))
     st.info("Reduce overtime, improve job satisfaction, review salaries and improve work-life balance.")
-
 with tab3:
-    age=st.number_input("Age",18,60,30)
-    salary=st.number_input("Monthly Income",1000,50000,5000)
-    distance=st.number_input("Distance From Home",1,30,5)
-    job=st.selectbox("Job Satisfaction",[1,2,3,4])
-    work=st.selectbox("Work Life Balance",[1,2,3,4])
-    years=st.number_input("Years At Company",0,40,5)
-    overtime=1 if st.selectbox("OverTime",["No","Yes"])=="Yes" else 0
-    gender=1 if st.selectbox("Gender",["Female","Male"])=="Male" else 0
-       if st.button("Predict"):
+    age = st.number_input("Age", 18, 60, 30)
+    salary = st.number_input("Monthly Income", 1000, 50000, 5000)
+    distance = st.number_input("Distance From Home", 1, 30, 5)
+    job = st.selectbox("Job Satisfaction", [1, 2, 3, 4])
+    work = st.selectbox("Work Life Balance", [1, 2, 3, 4])
+    years = st.number_input("Years At Company", 0, 40, 5)
+    overtime = 1 if st.selectbox("OverTime", ["No", "Yes"]) == "Yes" else 0
+    gender = 1 if st.selectbox("Gender", ["Female", "Male"]) == "Male" else 0
+
+    if st.button("Predict"):
         try:
             X = pd.DataFrame([{
                 "Age": age,
@@ -109,5 +109,4 @@ with tab3:
         except Exception as e:
             st.error(f"Prediction failed: {e}")
 
-st.caption("© 2026 WorkInsight | Developed by Priya")
 st.caption("© 2026 WorkInsight | Developed by Priya")
